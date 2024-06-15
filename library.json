@@ -13,5 +13,5 @@
     "url": "https://web.facebook.com/groups/1314040465469106"
   },
   "frameworks": "arduino",
-  "platforms": "esp8266, esp32"
+  "platforms": "esp32"
 }
