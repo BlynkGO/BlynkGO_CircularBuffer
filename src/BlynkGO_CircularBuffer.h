@@ -18,23 +18,25 @@ class BlynkGO_CircularBuffer
     // Constructor: กำหนดขนาดสูงสุดของบัฟเฟอร์
     BlynkGO_CircularBuffer(int size) : buffer(size), _maxSize(size), _cur_id(0), _count(0) {}
 
-    // ฟังก์ชันสำหรับการเพิ่มข้อมูล
-    // ฟังก์ชันสำหรับการเพิ่มข้อมูล
     void insert(const T& data) {
-      buffer[(_cur_id + _count) % _maxSize] = data;  // วางข้อมูลในตำแหน่งที่คำนวณจาก _cur_id และ _count
+      // Serial.println(data,5);
       if (_count < _maxSize) {
+        if(_count > 0) _cur_id = (_cur_id + 1) % _maxSize; // เพิ่ม _cur_id ตามลำดับและวนกลับเมื่อถึงขีดจำกัดของ buffer
+        buffer[_cur_id] = data;
         _count++;
       } else {
-        _cur_id = (_cur_id + 1) % _maxSize;  // วนดัชนี _cur_id ไปเรื่อยๆ เมื่อบัฟเฟอร์เต็ม
+        _cur_id = (_cur_id + 1) % _maxSize; // เพิ่ม _cur_id ตามลำดับและวนกลับเมื่อถึงขีดจำกัดของ buffer
+        buffer[_cur_id] = data;  // เพิ่มข้อมูลใน vector ในตำแหน่ง _cur_id (ทับข้อมูลเก่า)
       }
     }
+
     // ฟังก์ชันสำหรับการเข้าถึงข้อมูลในบัฟเฟอร์
     T get(int index) const
     {
       if(index >= _count || index < 0) {
         throw std::out_of_range("Index out of range");
       }
-      return buffer[(_cur_id + index) % _maxSize];  // คำนวณดัชนีจริงในบัฟเฟอร์
+      return buffer[index % _maxSize];  // คำนวณดัชนีจริงในบัฟเฟอร์
     }
 
     // ฟังก์ชันโอเปอเรเตอร์สำหรับการเข้าถึงข้อมูลในบัฟเฟอร์
@@ -45,14 +47,14 @@ class BlynkGO_CircularBuffer
       if (index >= _count || index < 0) {
         throw std::out_of_range("Index out of range");
       }
-      return buffer[(_cur_id + index) % _maxSize];
+      return buffer[ index % _maxSize];
     }
 
     // ฟังก์ชันสำหรับการแสดงข้อมูลทั้งหมดในบัฟเฟอร์
     void display() const
     {
       for(int i = 0; i < _count; ++i) {
-        Serial.print(String(buffer[(_cur_id + i) % _maxSize])+ String((i<_count-1)? ", ": ""));
+        Serial.print(String(buffer[i % _maxSize])+ String((i<_count-1)? ", ": ""));
       }
       Serial.println();
     }

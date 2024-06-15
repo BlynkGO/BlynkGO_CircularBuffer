@@ -1,5 +1,15 @@
 #include <BlynkGO_CircularBuffer.h>
 
+template<>
+void BlynkGO_CircularBuffer<float>::display() const
+{
+  for(int i = 0; i < _count; ++i) {
+    Serial.printf("%f ", buffer[i]);
+  }
+  Serial.println();
+}
+
+
 void setup()
 {
   Serial.begin(115200);
@@ -8,8 +18,8 @@ void setup()
   BlynkGO_CircularBuffer<float> cb(10);  // สร้างบัฟเฟอร์ที่มีขนาดสูงสุด 10 สำหรับ float
 
   // เพิ่มข้อมูลเข้าไปในบัฟเฟอร์
-  for(float i = 1.1; i <= 15.1; i += 1.0) {
-    cb.insert(i);
+  for(float f = 1.1; f <= 15.1; f += 1.0) {
+    cb.insert(f);
     cb.display();
   }
 
