@@ -1,2 +1,2 @@
 # BlynkGO_CircularBuffer
- BlynkGO CircularBuffer for ESP8266, ESP32
+ BlynkGO CircularBuffer for ESP32
