@@ -1,0 +1,17 @@
+{
+  "name": "BlynkGO_CircularBuffer",
+  "keywords": "BlynkGO CircularBuffer for ESP8266, ESP32",
+  "description": "BlynkGO CircularBuffer for ESP8266, ESP32",
+  "homepage": "https://web.facebook.com/groups/1314040465469106",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BlynkGO/BlynkGO_CircularBuffer"
+  },
+  "version": "1.0.0",
+  "authors": {
+    "name": "Ven.PT",
+    "url": "https://web.facebook.com/groups/1314040465469106"
+  },
+  "frameworks": "arduino",
+  "platforms": "esp8266, esp32"
+}

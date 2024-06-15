@@ -1,0 +1,7 @@
+BlynkGO_CircularBuffer	KEYWORD1
+insert	KEYWORD2
+get	KEYWORD2
+display	KEYWORD2
+isFull	KEYWORD2
+isEmpty	KEYWORD2
+cur_id	KEYWORD2
