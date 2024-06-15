@@ -11,8 +11,8 @@ class BlynkGO_CircularBuffer
   private:
     std::vector<T> buffer;  // บัฟเฟอร์เก็บข้อมูล
     int _maxSize;              // ขนาดสูงสุดของบัฟเฟอร์
-    int _cur_id;                // ดัชนีเริ่มต้นของข้อมูลปัจจุบัน
-    int _count;                // จำนวนของข้อมูลในบัฟเฟอร์
+    uint16_t _cur_id;          // ดัชนีเริ่มต้นของข้อมูลปัจจุบัน
+    uint16_t _count;           // จำนวนของข้อมูลในบัฟเฟอร์
 
   public:
     // Constructor: กำหนดขนาดสูงสุดของบัฟเฟอร์
@@ -58,11 +58,22 @@ class BlynkGO_CircularBuffer
     }
 
     // ฟังก์ชันสำหรับการตรวจสอบว่าบัฟเฟอร์เต็มหรือไม่
-    inline bool isFull() const  { return _count == _maxSize;  }
+    inline bool isFull() const        { return _count == _maxSize;  }
 
     // ฟังก์ชันสำหรับการตรวจสอบว่าบัฟเฟอร์ว่างหรือไม่
-    inline bool isEmpty() const { return this->_count == 0;   }
-    inline int cur_id() const   { return this->_cur_id;       }
+    inline bool isEmpty() const       { return this->_count == 0;   }
+    inline uint16_t cur_id() const    { return this->_cur_id;       }
+    void cur_id(uint16_t id) {
+      if (id > _count) id = _count-1;
+      this->_cur_id = id;
+    }
+
+    // ฟังก์ชันสำหรับการรีเซ็ตบัฟเฟอร์
+    void reset() {
+        _cur_id = 0;
+        _count = 0;
+        std::fill(buffer.begin(), buffer.end(), T{}); // รีเซ็ตข้อมูลในบัฟเฟอร์ด้วยค่าเริ่มต้นของ T
+    }
 };
 
 
