@@ -77,6 +77,7 @@ class BlynkGO_CircularBuffer
         std::fill(buffer.begin(), buffer.end(), T{}); // รีเซ็ตข้อมูลในบัฟเฟอร์ด้วยค่าเริ่มต้นของ T
     }
     inline uint16_t count()           { return this->_count;          }
+    inline uint16_t max_size()        { return this->_maxSize;        }
 };
 
 
