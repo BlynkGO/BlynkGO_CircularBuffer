@@ -76,6 +76,7 @@ class BlynkGO_CircularBuffer
         _count = 0;
         std::fill(buffer.begin(), buffer.end(), T{}); // รีเซ็ตข้อมูลในบัฟเฟอร์ด้วยค่าเริ่มต้นของ T
     }
+    inline uint16_t count()           { return this->_count;          }
 };
 
 
